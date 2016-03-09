@@ -69,7 +69,10 @@ class Document(object):
         return self._data
 
     def detect_variant(self):
-        raise NotImplementedError('Subclass Document and override this method')
+        raise NotImplementedError(
+            'Subclass Document and override this method to return a DocSchema '
+            ' derived class.'
+        )
 
     def extract(self):
         self._file.load()
