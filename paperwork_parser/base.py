@@ -5,8 +5,8 @@ from pdfquery import PDFQuery
 
 
 class DocFieldType(IntEnum):
-    NUMBER = 1
-    TEXT = 2
+    TEXT = 1
+    NUMBER = 2
     CUSTOM = 3  # TODO: Forget this and have 'type' take a callable instead?
 
 
