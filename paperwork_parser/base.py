@@ -36,9 +36,7 @@ class DocSchema(object):
                 )
             pdf_fields = [('assessment_year', field)]
         else:
-            pdf_fields = inspect.getmembers(
-                cls, lambda f: isinstance(f, DocField)
-            )
+            pdf_fields = cls.as_field_list()
 
         selectors = [('with_formatter', 'text')]
         selectors.extend(
@@ -48,6 +46,10 @@ class DocSchema(object):
             for key, field in pdf_fields
         )
         return selectors
+
+    @classmethod
+    def as_field_list(cls):
+        return inspect.getmembers(cls, lambda f: isinstance(f, DocField))
 
 
 class Document(object):
