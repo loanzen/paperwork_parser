@@ -20,6 +20,7 @@ This is a **work in progress**.
 
 from paperwork_parser.itr.itr import ITRVDocument
 
+# You can pass in a path or a file-like object during instantiation.
 doc = ITRVDocument('/path/to/itrv.pdf')
 
 # Will load the file and perform extraction of all fields and store results

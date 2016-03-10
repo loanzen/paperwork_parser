@@ -2,6 +2,9 @@ import inspect
 
 from enum import IntEnum
 from pdfquery import PDFQuery
+from pdfminer.pdfdocument import PDFSyntaxError
+
+from paperwork_parser.exceptions import InvalidPDFError
 
 
 class DocFieldType(IntEnum):
@@ -57,9 +60,22 @@ class Document(object):
     variants = []
 
     def __init__(self, file):
-        # TODO: Check for str or actual file inst?
-        self._file = PDFQuery(file)
+        """
+
+        Args:
+            file (str, File): A path to a PDF file, or a file-like object that
+                represents a pdf document.
+
+        Raises:
+            IOError: If a file path is specified and the file is not found.
+            InvalidPDFError: If the specified file is not a PDF.
+        """
         self._data = {}
+
+        try:
+            self._file = PDFQuery(file)
+        except PDFSyntaxError:
+            raise InvalidPDFError("The provided file doesn't seem to be a valid PDF document")  # noqa
 
         self._check_configuration()
 
