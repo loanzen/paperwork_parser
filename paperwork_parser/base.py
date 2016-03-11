@@ -42,12 +42,14 @@ class DocSchema(object):
             pdf_fields = cls.as_field_list()
 
         selectors = [('with_formatter', 'text')]
-        selectors.extend(
-            (key, 'LTTextLineHorizontal:in_bbox("{bbox}")'.format(
-                bbox=', '.join(str(coord) for coord in field.bbox)
-            ))
-            for key, field in pdf_fields
-        )
+        for key, field in pdf_fields:
+            str_coords = ', '.join(str(coord) for coord in field.bbox)
+            rule = 'LTTextLineHorizontal:in_bbox("{bbox}")'.format(
+                bbox=str_coords
+            )
+            selector = (key, rule)
+            selectors.append(selector)
+
         return selectors
 
     @classmethod
