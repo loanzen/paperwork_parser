@@ -25,19 +25,20 @@ class DocField(object):
 class DocSchema(object):
 
     @classmethod
-    def as_pdf_selectors(cls, field_name=None):
+    def as_pdf_selectors(cls, *field_names):
         """Return pdfminer selector for specified field. If no field is
         specified, then selectors for all fields are returned.
         """
-        if field_name is not None:
-            field = getattr(cls, field_name, None)
-            if (field is None) or (not isinstance(field, DocField)):
-                raise ValueError(
-                    '{field} is not a DocField attribute on {klass}'.format(
-                        field=field_name, klass=cls.__name__
-                    )
-                )
-            pdf_fields = [('assessment_year', field)]
+        # Collate relevant fields
+        if field_names:
+            pdf_fields = []
+            for field_name in field_names:
+                field = getattr(cls, field_name, None)
+                if (field is None) or (not isinstance(field, DocField)):
+                    raise ValueError('{field} is not a DocField attribute on {klass}'.format(  # noqa
+                            field=field_name, klass=cls.__name__
+                    ))
+                pdf_fields.append((field_name, field))
         else:
             pdf_fields = cls.as_field_list()
 
