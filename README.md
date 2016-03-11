@@ -74,3 +74,5 @@ def main():
 - Hanle data-type specification
 - Handle fields being mandatory/non-mandatory.
 - `Document.variants` isn't really used. `Document.detect_variant()` seems to do all the necessary work. Re-evaluate.
+- See if declarative document detection can be done. Currently user has to
+  override `Document.detect_variant()` and work directly with PDFQuery.
