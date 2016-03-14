@@ -74,6 +74,7 @@ class Document(object):
             InvalidPDFError: If the specified file is not a PDF.
         """
         self._data = {}
+        self._variant = None
 
         try:
             self._file = PDFQuery(file)
@@ -96,11 +97,15 @@ class Document(object):
         )
 
     def extract(self):
+        """Loads up file and performs extraction of fields. Extracted
+        information is stored in ``self.data``.
+        """
+        # Load happens here (lazy)
         self._file.load()
 
-        variant = self.detect_variant()
+        self._variant = self.detect_variant()
 
-        selectors = variant.as_pdf_selectors()
+        selectors = self._variant.as_pdf_selectors()
         extracted = self._file.extract(selectors)
 
         self._data = extracted
@@ -113,3 +118,10 @@ class Document(object):
                     name=self.__class__.__name__
                 )
             )
+
+
+"""
+- 'verify' before' 'detect'?
+- ITR docs come in different variants.
+
+"""
