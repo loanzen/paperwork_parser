@@ -3,6 +3,8 @@ from paperwork_parser.base import DocField, DocSchema
 
 class ITRVSchemaCommon(DocSchema):
 
+    form_title = DocField((52, 745, 478, 774))
+
     # For assessment year, grabbing a bigger box that includes labels. That way
     # we can keep the same bbox across variants, since it keeps getting
     # displaced in different years. TODO: Verify if necessary
@@ -41,6 +43,8 @@ class ITRVSchemaCommon(DocSchema):
 
 
 class ITRVSchema2013(ITRVSchemaCommon):
+
+    form_title = DocField((52, 754, 478, 776))
 
     company_name = DocField((72, 667, 432, 696))
     flat_door_block = DocField((63.7, 619, 234, 650))
