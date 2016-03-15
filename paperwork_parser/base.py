@@ -35,7 +35,7 @@ class DocSchema(object):
             for field_name in field_names:
                 field = getattr(cls, field_name, None)
                 if (field is None) or (not isinstance(field, DocField)):
-                    raise ValueError('{field} is not a DocField attribute on {klass}'.format(  # noqa
+                    raise AttributeError('{field} is not a DocField attribute on {klass}'.format(  # noqa
                             field=field_name, klass=cls.__name__
                     ))
                 pdf_fields.append((field_name, field))
