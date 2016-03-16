@@ -1,7 +1,15 @@
-from paperwork_parser.base import DocField, DocSchema
+import re
+
+from paperwork_parser.base import DocField, DocVariant
+from paperwork_parser.exceptions import FieldParseError
 
 
-class ITRVSchemaCommon(DocSchema):
+class ITRVBase(DocVariant):
+
+    # Overridden in subclasses
+    for_year = None
+
+    test_fields = ['form_title', 'assessment_year']
 
     form_title = DocField((52, 745, 478, 774))
 
@@ -41,8 +49,34 @@ class ITRVSchemaCommon(DocSchema):
     tax_payable = DocField((468, 261.5, 585.2, 279.5))
     refund = DocField((468, 246.5, 585.2, 261.5))
 
+    def check_for_match(self):
+        # TODO: Move this text out of here
+        form_title_text = 'INDIAN INCOME TAX RETURN ACKNOWLEDGEMENT'
+        title_match = (self.form_title == form_title_text)
 
-class ITRVSchema2013(ITRVSchemaCommon):
+        year = self._parse_assessment_year()
+        year_match = (year == self.for_year)
+
+        return all([title_match, year_match])
+
+    def _parse_assessment_year(self):
+        pattern = r'Assessment\s*Year\s*(\d\d\d\d\-\d\d)'
+        year_text = self.assessment_year
+        match = re.match(pattern, year_text)
+        if match is None:
+            raise FieldParseError(
+                "Could not parse assessment year from the document."
+            )
+
+        year = match.groups()[0]  # eg. 2014-15
+        year = int(year.split('-')[0])  # eg. 2014
+
+        return year
+
+
+class ITRV2013(ITRVBase):
+
+    for_year = 2013
 
     form_title = DocField((52, 754, 478, 776))
 
@@ -66,7 +100,10 @@ class ITRVSchema2013(ITRVSchemaCommon):
     dsc_si_no_and_issuer = DocField((108.5, 146, 577, 181.5))
 
 
-class ITRVSchema2014(ITRVSchemaCommon):
+class ITRV2014(ITRVBase):
+
+    for_year = 2014
+
     signed_by_name = DocField((185, 206, 392, 227))
     signed_by_capacity_of = DocField((469.7, 206, 575.5, 227))
     signed_by_pan = DocField((90, 183, 157, 203))
@@ -77,7 +114,10 @@ class ITRVSchema2014(ITRVSchemaCommon):
     dsc_si_no_and_issuer = DocField((108.5, 146, 577, 181.5))
 
 
-class ITRVSchema2015(ITRVSchemaCommon):
+class ITRV2015(ITRVBase):
+
+    for_year = 2015
+
     status = DocField((468, 577, 584.5, 604.7))
     aadhar_number = DocField((513.5, 532, 584.5, 560.5))
 
