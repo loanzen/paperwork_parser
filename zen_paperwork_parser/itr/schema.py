@@ -1,7 +1,7 @@
 import re
 
-from paperwork_parser.base import DocField, DocVariant
-from paperwork_parser.exceptions import FieldParseError
+from zen_document_parser.base import DocField, DocVariant
+from zen_document_parser.exceptions import FieldParseError
 
 
 class ITRVBase(DocVariant):

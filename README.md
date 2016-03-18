@@ -1,8 +1,8 @@
-# Paperwork Parser
+# Zen Document Parser
 
 ## Intro
 
-paperwork_parser is utility for extracting data from various official documents. It uses [PDFQuery](https://github.com/jcushman/pdfquery) behind the scenes.
+zen_document_parser is a utility for extracting data from various official documents. It uses [PDFQuery](https://github.com/jcushman/pdfquery) behind the scenes.
 
 Currently, there is out-of-the-box support for parsing **Indian Government ITR-V PDF documents.**
 
@@ -18,7 +18,7 @@ This is a **work in progress**.
 
 ```python
 
-from paperwork_parser.itr.itr import ITRVDocument
+from zen_document_parser.itr.itr import ITRVDocument
 
 # You can pass in a path or a file-like object during instantiation.
 doc = ITRVDocument('/path/to/itrv.pdf')
@@ -46,7 +46,7 @@ You basically follow these steps:
 
 ```python
 
-from paperwork_parser.base import DocField, DocVariant, Document
+from zen_document_parser.base import DocField, DocVariant, Document
 
 
 class Variant1(DocVariant):
@@ -95,7 +95,6 @@ def main():
 
 # TODO
 
-- Handle error cases
 - Hanle data-type specification
 - Handle fields being mandatory/non-mandatory.
 - Right now the user has to explicitly specify `test_fields` for optimization purposes. Find a way where this isn't needed.

@@ -2,7 +2,7 @@ from enum import IntEnum
 from pdfquery import PDFQuery
 from pdfminer.pdfdocument import PDFSyntaxError
 
-from paperwork_parser.exceptions import InvalidPDFError, UnknownVariantError
+from zen_document_parser.exceptions import InvalidPDFError, UnknownVariantError
 
 
 class DocFieldType(IntEnum):
@@ -144,7 +144,6 @@ class DocVariant(object):
         fields = self._meta['field_info']
         out = dict((fname, getattr(self, fname)) for fname in fields)
         return out
-
 
 
 class Document(object):
