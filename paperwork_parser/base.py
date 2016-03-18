@@ -140,6 +140,12 @@ class DocVariant(object):
 
         return selectors
 
+    def to_dict(self):
+        fields = self._meta['field_info']
+        out = dict((fname, getattr(self, fname)) for fname in fields)
+        return out
+
+
 
 class Document(object):
 
