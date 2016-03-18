@@ -158,7 +158,7 @@ class Document(object):
             IOError: If a file path is specified and the file is not found.
             InvalidPDFError: If the specified file is not a PDF.
         """
-        self._data = {}
+        self._data = None
         self._variant = None  # TODO: Is this needed?
 
         self._check_configuration()
@@ -210,6 +210,9 @@ class Document(object):
                     file=self._file.file.name, cls_name=self.__class__.__name__
                 )
             )
+
+        # Load completely
+        variant.extract()
 
         self._data = variant
 
