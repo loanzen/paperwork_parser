@@ -55,7 +55,6 @@ class Variant1(DocVariant):
     test_fields = ['form_title']
 
     form_title = DocField((30, 300, 500, 380))
-
     name = DocField((100, 120, 400, 140.5))
     address = DocField((150, 90, 650, 110))
 
@@ -70,7 +69,6 @@ class Variant2(DocVariant):
     test_fields = ['form_title']
 
     form_title = DocField((30, 290, 500, 380))
-
     name = DocField((70, 140, 350, 160))
     address = DocField((150, 120, 650, 140))
     pan_no = DocField((150, 80, 650, 100))
