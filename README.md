@@ -87,7 +87,7 @@ class MyForm(Document):
 def main():
     doc = MyForm('/path/to/form.pdf')
     doc.extract()
-    print doc.data.to_dict()
+    print(doc.data.to_dict())
 ```
 
 
