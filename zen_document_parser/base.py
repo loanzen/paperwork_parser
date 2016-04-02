@@ -42,16 +42,16 @@ class DocVariantMeta(type):
         misc_members = []
         doc_field_members = []
 
+        # First get doc fields from parents
+        for parent in parents:
+            doc_field_members.extend(parent._meta['field_info'].iteritems())
+
         # Collect doc fields
         for field_name, field_obj in members.iteritems():
             if isinstance(field_obj, DocField):
                 doc_field_members.append((field_name, field_obj))
             else:
                 misc_members.append((field_name, field_obj))
-
-        # Also get doc fields from parents
-        for parent in parents:
-            doc_field_members.extend(parent._meta['field_info'].iteritems())
 
         # Put misc stuff into class
         for member_name, member_value in misc_members:
