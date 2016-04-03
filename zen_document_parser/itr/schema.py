@@ -28,7 +28,7 @@ class ITRVBase(DocVariant):
     state = DocField((235.3, 533, 379, 561.3))
     pin = DocField((379, 533, 433, 561.3))
 
-    orignal_or_revised = DocField((516, 504, 579, 520))
+    original_or_revised = DocField((516, 504, 579, 520))
     designation_of_ao = DocField((216.5, 505, 432.5, 524))
     e_filing_ack_num = DocField((237.5, 484.8, 403.8, 502.8))
 
