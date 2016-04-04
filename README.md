@@ -10,7 +10,15 @@ The library also supports parsing of arbitrary PDF documents by allowing you to 
 
 Check out the examples below.
 
-This is a **work in progress**.
+
+## Installation
+
+Install using [pip](https://pip.pypa.io/en/stable/installing/) like so:
+
+```bash
+
+$ pip install zen_document_parser
+```
 
 ## Usage
 
