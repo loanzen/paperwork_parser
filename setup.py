@@ -9,7 +9,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='zen_document_parser',
-    version='0.1',
+    version='0.11',
     description='A library for parsing various government documents as well as general PDFs',  # noqa
     long_description=long_description,
     url='https://github.com/loanzen/zen_document_parser',
@@ -19,7 +19,7 @@ setup(
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
-        'Topic :: Software Development :: Text Processing',
+        'Topic :: Software Development :: Libraries',
         'Topic :: Utilities',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
